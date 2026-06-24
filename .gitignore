@@ -1,0 +1,27 @@
+# Unity generated
+/Library/
+/Temp/
+/Logs/
+/obj/
+/Build/
+/Builds/
+/UserSettings/
+
+# Unity cache
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# VS / Rider
+.vs/
+*.csproj
+*.unityproj
+*.suo
+*.user
+*.pidb
+*.booproj
+/[Ll]ogs/
+
+# OS
+.DS_Store
+Thumbs.db

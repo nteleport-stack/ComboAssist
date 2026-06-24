@@ -8,8 +8,19 @@ public static class FileManager
         System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments),
         "ComboAssist");
 
+    private const int LeadInFrames = 180; // 3 seconds at 60 fps
+
     public static void SaveCombo(ComboData combo, string fileName)
     {
+        combo.events.Sort((a, b) => a.startFrame.CompareTo(b.startFrame));
+
+        int offset = combo.events[0].startFrame - LeadInFrames;
+        foreach (var e in combo.events)
+        {
+            e.startFrame -= offset;
+            e.endFrame   -= offset;
+        }
+
         Directory.CreateDirectory(SaveDirectory);
         string path = Path.Combine(SaveDirectory, fileName + ".combo.json");
         string json = JsonConvert.SerializeObject(combo, Formatting.Indented);

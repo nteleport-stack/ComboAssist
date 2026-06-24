@@ -16,12 +16,12 @@ public class InputRecorder : MonoBehaviour
         { Key.W,         (1, 0) }, { Key.UpArrow,    (1, 0) },  // Up
         { Key.S,         (2, 0) }, { Key.DownArrow,  (2, 0) },  // Down
         { Key.D,         (3, 0) }, { Key.RightArrow, (3, 0) },  // Right
-        { Key.U,         (4, 1) },                               // Light Punch
-        { Key.J,         (4, 2) },                               // Light Kick
-        { Key.I,         (5, 1) },                               // Medium Punch
-        { Key.K,         (5, 2) },                               // Medium Kick
-        { Key.O,         (6, 1) },                               // Heavy Punch
-        { Key.L,         (6, 2) },                               // Heavy Kick
+        { Key.U,         (4, 0) },                               // Light Punch
+        { Key.J,         (4, 1) },                               // Light Kick
+        { Key.I,         (5, 0) },                               // Medium Punch
+        { Key.K,         (5, 1) },                               // Medium Kick
+        { Key.O,         (6, 0) },                               // Heavy Punch
+        { Key.L,         (6, 1) },                               // Heavy Kick
         { Key.Space,     (7, 0) },                               // Drive Parry
     };
 

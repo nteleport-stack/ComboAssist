@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class InputEvent
 {
     public int lane;       // 0=Left 1=Up 2=Down 3=Right 4=Light 5=Medium 6=Heavy 7=DriveParry
-    public int noteType;   // 0=Directional 1=Punch 2=Kick
+    public int noteType;   // Directional lanes: always 0 — Attack lanes: 0=Punch 1=Kick
     public int startFrame;
     public int endFrame;
 }

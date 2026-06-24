@@ -38,3 +38,20 @@ A rhythm-game combo trainer for Street Fighter 6. Keyboard/Hitbox players practi
 **Up next:** Milestone 3 — Rhythm Game Core (load combo → falling notes → hit detection)
 
 ---
+
+## Session 4 — 2026-06-24 — M2 Bug Fixes & Lane Redesign
+
+**Achieved:**
+- Fixed `InputRecorder.cs` noteType bug — Punch/Kick were swapped on attack lanes (Punch was 1, Kick was 2; corrected to Punch=0, Kick=1)
+- Redesigned lane structure to final 8-lane layout:
+  - Lane 0: Left (A) | Lane 1: Up (W) | Lane 2: Down (S) | Lane 3: Right (D)
+  - Lane 4: Light (U=Punch, J=Kick) | Lane 5: Medium (I=Punch, K=Kick) | Lane 6: Heavy (O=Punch, L=Kick)
+  - Lane 7: Drive Parry (Space)
+  - Up and Down kept as separate lanes to support combos that hold both simultaneously
+- Updated `ComboData.cs` noteType comment to reflect correct mapping
+- Fixed `FileManager.cs` SaveCombo — now sorts events chronologically by startFrame and normalizes frames so the first input always lands at frame 180 (3-second lead-in at 60 fps)
+- Verified with re-recorded 626LP Shoryuken `.combo.json`
+
+**Up next:** Milestone 3 — Rhythm Game Core (load combo → falling notes → hit detection)
+
+---

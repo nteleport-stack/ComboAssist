@@ -45,7 +45,7 @@ public class InputRecorder : MonoBehaviour
             _combo.events.Add(new InputEvent
             {
                 lane = lane, noteType = noteType,
-                startFrame = kv.Value, endFrame = Time.frameCount
+                startFrame = kv.Value, endFrame = Mathf.RoundToInt(Time.time * _combo.fps)
             });
         }
         _heldKeys.Clear();
@@ -66,7 +66,7 @@ public class InputRecorder : MonoBehaviour
             var key = kb[kv.Key];
 
             if (key.wasPressedThisFrame && !_heldKeys.ContainsKey(kv.Key))
-                _heldKeys[kv.Key] = Time.frameCount;
+                _heldKeys[kv.Key] = Mathf.RoundToInt(Time.time * _combo.fps);
 
             if (key.wasReleasedThisFrame && _heldKeys.TryGetValue(kv.Key, out int startFrame))
             {
@@ -74,7 +74,7 @@ public class InputRecorder : MonoBehaviour
                 _combo.events.Add(new InputEvent
                 {
                     lane = lane, noteType = noteType,
-                    startFrame = startFrame, endFrame = Time.frameCount
+                    startFrame = startFrame, endFrame = Mathf.RoundToInt(Time.time * _combo.fps)
                 });
                 _heldKeys.Remove(kv.Key);
             }

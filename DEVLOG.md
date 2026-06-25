@@ -55,3 +55,18 @@ A rhythm-game combo trainer for Street Fighter 6. Keyboard/Hitbox players practi
 **Up next:** Milestone 3 — Rhythm Game Core (load combo → falling notes → hit detection)
 
 ---
+
+## Session 5 — 2026-06-25 — M3 Part 1: Falling Notes ✅
+
+**Achieved:**
+- Created `Practice` scene with Canvas (Screen Space - Overlay, 1920×1080 reference resolution)
+- `Note.cs` — falling note component; position driven by wall-clock time so speed is frame-rate independent; destroys only after the top edge clears the judgment line (fixes hold-note early disappearance)
+- `NoteSpawner.cs` — loads ComboData, pre-calculates spawn time per note, instantiates colored note prefabs; draws 9 semi-transparent lane separator lines on Start; color scheme: directionals = white, Light = blue, Medium = yellow, Heavy = red, Drive Parry = purple
+- `PracticeManager.cs` — auto-loads the most recently modified `.combo.json` from `~/Documents/ComboAssist/` on scene start
+- **Bug fixed:** `InputRecorder.cs` was using `Time.frameCount` (engine frames) instead of wall-clock time, causing playback speed to scale with monitor refresh rate; fixed to `Mathf.RoundToInt(Time.time * fps)` — existing `.combo.json` files must be re-recorded
+
+**M3 Part 1 deliverable met:** Load a recorded combo → colored notes fall at correct speed → hold notes stay visible for full duration → lanes separated by visible lines.
+
+**Up next:** M3 Part 2 — InputJudge (hit detection, Perfect/Good/Miss judgment)
+
+---

@@ -70,3 +70,24 @@ A rhythm-game combo trainer for Street Fighter 6. Keyboard/Hitbox players practi
 **Up next:** M3 Part 2 — InputJudge (hit detection, Perfect/Good/Miss judgment)
 
 ---
+
+## Session 6 — 2026-06-26 — M3 Part 2: Input Judgment (in progress)
+
+**Achieved:**
+- Removed "Good" window — only Perfect (±50ms) and Miss, matching fighting game conventions
+- Short note vs long note classification (threshold: 0.1s / ~6 frames at 60fps):
+  - **Short note**: always 30px standardized height; perfect on press-down only; disappears on hit
+  - **Long note**: height based on hold duration; press-down turns note grey; note disappears only when key-up also lands within ±50ms of tail target time; missed head = note falls through; missed tail = note stays and scrolls off
+- `Note.cs` — rebuilt with compound visual: short = single circle (center is judgment point); long = darker rectangle body flanked by two circles (bottom = head judgment, top = tail judgment); pivot adapts per type so the `y = judgmentY + fallSpeed * (targetTime - Time.time)` formula works correctly for both
+- `InputJudge.cs` — key press hits short notes immediately; long note head hit tracked per key in `heldNotes` dict; key release checks tail window
+- `JudgmentDisplay.cs` — switched to OnGUI (no TMP scene setup required); gold "PERFECT" / red "MISS" with fade-out; positioned to the right of lanes
+- `NoteSpawner.cs` — notes now built entirely in code (no prefab Image needed); added visible horizontal judgment line; `judgmentY` exposed as public Inspector field
+- `PracticeManager.cs` — added `FindObjectOfType` fallbacks so nothing breaks if Inspector slots are empty
+- Circle sprite fixed: `Resources.GetBuiltinResource` was returning rectangles in Unity 6; replaced with a programmatically generated 128×128 circle texture (cached static)
+
+**Still outstanding (next session):**
+- Judgment line position in fullscreen is still off — user ran out of time before resolving; `judgmentY` value needs tuning for the player's monitor/resolution
+
+**Up next:** Finish M3 Part 2 — fix fullscreen judgment line position, then move to M4 (speed control)
+
+---

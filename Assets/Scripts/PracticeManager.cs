@@ -4,9 +4,25 @@ using UnityEngine;
 public class PracticeManager : MonoBehaviour
 {
     public NoteSpawner noteSpawner;
+    public InputJudge inputJudge;
+    public JudgmentDisplay judgmentDisplay;
 
     void Start()
     {
+        // Auto-find if not wired in Inspector
+        if (noteSpawner == null)     noteSpawner = FindObjectOfType<NoteSpawner>();
+        if (inputJudge == null)      inputJudge = FindObjectOfType<InputJudge>();
+        if (judgmentDisplay == null) judgmentDisplay = FindObjectOfType<JudgmentDisplay>();
+
+        // Create JudgmentDisplay on this object if it doesn't exist anywhere in the scene
+        if (judgmentDisplay == null) judgmentDisplay = gameObject.AddComponent<JudgmentDisplay>();
+
+        // Wire InputJudge to the NoteSpawner in case it wasn't set in Inspector
+        if (inputJudge != null) inputJudge.noteSpawner = noteSpawner;
+
+        inputJudge.OnJudgment  += judgmentDisplay.Show;
+        noteSpawner.OnNoteMiss += _ => judgmentDisplay.Show(Judgment.Miss);
+
         ComboData combo = LoadMostRecent();
         if (combo != null)
             noteSpawner.StartSession(combo);
